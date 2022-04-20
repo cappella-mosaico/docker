@@ -7,7 +7,6 @@ Before starting, make sure you have Docker, docker-compose and Docker Desktop in
   - git clone git@github.com:cappella-mosaico/pastorais.git
   - git clone git@github.com:cappella-mosaico/financeiro.git
   - git clone git@github.com:cappella-mosaico/comunicacao.git
-- cd front-admin -> npm install
 - Back to docker (cd ..)
-  - ./build.sh
-  - docker-compose up    
+  - `./linux_build.sh` or `./mac_build.sh` based on your environment
+  - `docker-compose up`
