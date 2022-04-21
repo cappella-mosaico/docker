@@ -1,6 +1,11 @@
 # Running process
 
 Before starting, make sure you have Docker, docker-compose and Docker Desktop installed - https://docs.docker.com/get-docker/
+you'll also need Java, Maven, Node and NPM.
+
+To install Java and Maven, first install SDKMAN with `curl -s "https://get.sdkman.io" | bash`
+then `sdk install java 17.0.2-open`
+then `sdk install maven`
 
 - Clone all repos from the organization
   - `pull_services.sh`
