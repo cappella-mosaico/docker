@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - '../front-admin:/app'
-      - '../front-admin/app/node-modules'
+      - '../front-admin:/app/node-modules'
     ports:
       - 3001:3000
     environment:
@@ -17,10 +17,10 @@ services:
   comunicacao:
     image: comunicacao
     environment:
-        #      - ONE_SIGNAL_APP_ID=97bc067c-2344-4a86-a6b1-0206f51df4e9
-      - ONE_SIGNAL_APP_ID=2c373247-c946-4129-ae38-c05accad3d67
-        #      - ONE_SIGNAL_APP_KEY=NTgwOTNjYmEtNGZjYi00ZGYyLThmMTktMGM5MzdiNzRkZDkz
-      - ONE_SIGNAL_APP_KEY=MmNkZWQ1MjktMGJkMS00MzVjLTg2NmUtY2I2MDFhNTk1YTU4
+      - ONE_SIGNAL_APP_ID=97bc067c-2344-4a86-a6b1-0206f51df4e9
+        # production      - ONE_SIGNAL_APP_ID=2c373247-c946-4129-ae38-c05accad3d67
+      - ONE_SIGNAL_APP_KEY=NTgwOTNjYmEtNGZjYi00ZGYyLThmMTktMGM5MzdiNzRkZDkz
+        # production      - ONE_SIGNAL_APP_KEY=MmNkZWQ1MjktMGJkMS00MzVjLTg2NmUtY2I2MDFhNTk1YTU4
   db:
     build:
       context: ./db
