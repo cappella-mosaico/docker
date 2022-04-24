@@ -15,9 +15,11 @@ rm ./pastorais-1.0-SNAPSHOT.war
 #cd ../docker || exit
 
 cd ../comunicacao
-sed -i '' 's/localhost:29092/kafka:9092/g' src/main/java/startup/App.java
+sed -i '' 's/localhost:29092/kafka:9092/g' src/main/java/kafka/NewPastoralConsumer.java
+sed -i '' 's/localhost:29092/kafka:9092/g' src/main/java/kafka/LembretePastoralConsumer.java
 export ONE_SIGNAL_APP_ID="97bc067c-2344-4a86-a6b1-0206f51df4e9" && export ONE_SIGNAL_APP_KEY="NTgwOTNjYmEtNGZjYi00ZGYyLThmMTktMGM5MzdiNzRkZDkz" && mvn clean install
-sed -i '' 's/kafka:9092/localhost:29092/g' src/main/java/startup/App.java
+sed -i '' 's/kafka:9092/localhost:29092/g' src/main/java/kafka/NewPastoralConsumer.java
+sed -i '' 's/kafka:9092/localhost:29092/g' src/main/java/kafka/LembretePastoralConsumer.java
 cp ./target/comunicacao-1.0-SNAPSHOT.jar .
 docker build -f Dockerfile -t comunicacao .
 rm ./comunicacao-1.0-SNAPSHOT.jar

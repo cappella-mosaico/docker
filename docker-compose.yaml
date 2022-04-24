@@ -28,6 +28,8 @@ services:
         # production      - ONE_SIGNAL_APP_ID=2c373247-c946-4129-ae38-c05accad3d67
       - ONE_SIGNAL_APP_KEY=NTgwOTNjYmEtNGZjYi00ZGYyLThmMTktMGM5MzdiNzRkZDkz
         # production      - ONE_SIGNAL_APP_KEY=MmNkZWQ1MjktMGJkMS00MzVjLTg2NmUtY2I2MDFhNTk1YTU4
+    depends_on:
+      - pastorais
   db:
     build:
       context: ./db
@@ -76,7 +78,8 @@ services:
       kafka-topics.sh --bootstrap-server kafka:9092 --list
 
       echo -e 'Creating kafka topics'
-      kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic pastorais --replication-factor 1 --partitions 1
+      kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic novas-pastorais --replication-factor 1 --partitions 1
+      kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic lembretes-pastorais --replication-factor 1 --partitions 1
 
       echo -e 'Successfully created the following topics:'
       kafka-topics.sh --bootstrap-server kafka:9092 --list
