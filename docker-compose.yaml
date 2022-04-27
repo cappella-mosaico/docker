@@ -50,6 +50,8 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    ports:
+      - '2346:5432'
 
   financeiro:
     image: financeiro
