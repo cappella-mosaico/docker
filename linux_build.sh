@@ -46,3 +46,7 @@ sed -i 's/kafka:9092/localhost:29092/g' src/main/java/kafka/LembretePastoralCons
 cp ./target/comunicacao-1.0-SNAPSHOT.jar .
 docker build -f Dockerfile -t comunicacao .
 rm ./comunicacao-1.0-SNAPSHOT.jar
+
+# GATEWAY
+cd ../gateway
+docker build -t gateway .
