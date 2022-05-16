@@ -14,13 +14,21 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
 
+  gateway:
+    build:
+      context: ../gateway/
+      dockerfile: Dockerfile
+    image: gateway
+    ports:
+      - "8082:9090"
+
   comunicacao:
     image: comunicacao
     environment:
       - ONE_SIGNAL_APP_ID=${ONE_SIGNAL_APP_ID}
       - ONE_SIGNAL_APP_KEY=${ONE_SIGNAL_APP_KEY}
     depends_on:
-      - pastorais
+      - kafka
   db:
     build:
       context: ./db
@@ -29,16 +37,14 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-#    I might not need a port configuration here because the docker-compose
-#    already allows the other containers to access postgres' default CONTAINER_PORT, right?
-    ports:
-      - '2345:5432'
+#    ports:
+#      - '2345:5432'
 
   pastorais:
     image: pastorais
     restart: always
-    ports:
-      - '8080:8080'
+#    ports:
+#      - '8080:8080'
     depends_on:
       - db
 
