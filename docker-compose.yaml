@@ -19,6 +19,8 @@ services:
       context: ../gateway/
       dockerfile: Dockerfile
     image: gateway
+    environment:
+      - IPMOSAICO_ALLOW_HOST=${IPMOSAICO_ALLOW_HOST}
     ports:
       - "9000:9090"
 
