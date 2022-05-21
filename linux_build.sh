@@ -3,6 +3,7 @@
 # FRONTEND
 cd ../front-admin
 npm install
+docker build -f Dockerfile.prod -t front-admin .
 
 # PASTORAIS
 cd ../docker
