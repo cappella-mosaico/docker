@@ -3,13 +3,9 @@ version: '3.3'
 services:
 
   front-admin-prod:
-    build:
-      context: ../front-admin/
-      dockerfile: Dockerfile.prod
+    image: front-admin-prod
     ports:
       - 3001:80
-    environment:
-      - REACT_APP_IPMOSAICO_ROOT_URL=${REACT_APP_IPMOSAICO_ROOT_URL}
 
   gateway:
     build:
