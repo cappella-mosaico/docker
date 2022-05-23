@@ -3,6 +3,7 @@
 # FRONTEND
 cd ../front-admin
 npm install
+docker build --build-arg REACT_APP_IPMOSAICO_ROOT_URL=$REACT_APP_IPMOSAICO_ROOT_URL -f Dockerfile.prod -t front-admin-prod .
 
 # PASTORAIS
 cd ../docker
@@ -45,3 +46,7 @@ sed -i '' 's/kafka:9092/localhost:29092/g' src/main/java/kafka/LembretePastoralC
 cp ./target/comunicacao-1.0-SNAPSHOT.jar .
 docker build -f Dockerfile -t comunicacao .
 rm ./comunicacao-1.0-SNAPSHOT.jar
+
+# GATEWAY
+cd ../gateway
+docker build -t gateway .
