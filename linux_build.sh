@@ -3,7 +3,7 @@
 # FRONTEND
 cd ../front-admin
 npm install
-docker build -f Dockerfile.prod -t front-admin-prod .
+docker build --build-arg REACT_APP_IPMOSAICO_ROOT_URL=$REACT_APP_IPMOSAICO_ROOT_URL -f Dockerfile.prod -t front-admin-prod .
 
 # PASTORAIS
 cd ../docker
