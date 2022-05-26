@@ -48,6 +48,15 @@ cp ./target/comunicacao-1.0-SNAPSHOT.jar .
 docker build -f Dockerfile -t comunicacao .
 rm ./comunicacao-1.0-SNAPSHOT.jar
 
+# EVENTOS
+cd ../eventos
+sed -i 's/localhost/db-eventos/g' src/main/resources/application.properties
+./mvnw install
+cp ./target/eventos-0.0.1-SNAPSHOT.jar .
+docker build -f Dockerfile -t eventos .
+rm ./eventos-0.0.1-SNAPSHOT.jar
+sed -i 's/db-eventos/localhost/g' src/main/resources/application.properties
+
 # GATEWAY
 cd ../gateway
 docker build -t gateway .

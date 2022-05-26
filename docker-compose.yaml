@@ -16,9 +16,6 @@ services:
       - REACT_APP_IPMOSAICO_ROOT_URL=${REACT_APP_IPMOSAICO_ROOT_URL}
 
   gateway:
-    build:
-      context: ../gateway/
-      dockerfile: Dockerfile
     image: gateway
     environment:
       - IPMOSAICO_ALLOW_HOST=${IPMOSAICO_ALLOW_HOST}
@@ -40,14 +37,10 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-#    ports:
-#      - '2345:5432'
 
   pastorais:
     image: pastorais
     restart: always
-#    ports:
-#      - '8080:8080'
     depends_on:
       - db
 
@@ -57,15 +50,23 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - '2346:5432'
 
   financeiro:
     image: financeiro
-#    ports:
-#      - '8081:8080'
     depends_on:
       - db-financeiro
+
+  db-eventos:
+    build:
+      context: ./db-eventos
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  eventos:
+    image: eventos
+    depends_on:
+      - db-eventos
 
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.7
