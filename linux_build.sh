@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# dont forget to pass .prod as a param when building for production
+
 # FRONTEND
 cd ../front-admin
 npm install
