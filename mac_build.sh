@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo 'dont forget to pass .prod as a param when building for production'
+
 # FRONTEND
 cd ../front-admin
 npm install
@@ -33,6 +35,7 @@ sed -i '' 's/db-financeiro\//localhost\//g' src/main/resources/META-INF/persiste
 sed -i '' 's/db-financeiro\//localhost\//g' src/main/java/startup/Startup.java
 cp ./target/financeiro-1.0-SNAPSHOT.war .
 docker build -f Dockerfile -t financeiro .
+rm ./financeiro-1.0-SNAPSHOT.war
 rm ./web.xml
 rm ./*.jar
 
@@ -46,6 +49,15 @@ sed -i '' 's/kafka:9092/localhost:29092/g' src/main/java/kafka/LembretePastoralC
 cp ./target/comunicacao-1.0-SNAPSHOT.jar .
 docker build -f Dockerfile -t comunicacao .
 rm ./comunicacao-1.0-SNAPSHOT.jar
+
+# EVENTOS
+cd ../eventos
+sed -i '' 's/localhost:5432/db-eventos/g' src/main/resources/application.properties
+./mvnw install
+cp ./target/eventos-0.0.1-SNAPSHOT.jar .
+docker build -f Dockerfile -t eventos .
+rm ./eventos-0.0.1-SNAPSHOT.jar
+sed -i '' 's/db-eventos/localhost:5432/g' src/main/resources/application.properties
 
 # GATEWAY
 cd ../gateway
