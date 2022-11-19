@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# dont forget to pass .prod as a param when building for production
+echo 'dont forget to pass .prod as a param when building for production'
 
 # FRONTEND
 echo 'building frontend'
