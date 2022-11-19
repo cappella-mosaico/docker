@@ -43,6 +43,7 @@ services:
     restart: always
     depends_on:
       - db
+      - kafka
 
   db-financeiro:
     build:
@@ -55,6 +56,7 @@ services:
     image: financeiro
     depends_on:
       - db-financeiro
+      - kafka
 
   db-eventos:
     build:
@@ -67,6 +69,7 @@ services:
     image: eventos
     depends_on:
       - db-eventos
+      - kafka
 
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.7
@@ -76,6 +79,7 @@ services:
       - "zookeeper_data:/bitnami"
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+
   kafka:
     image: docker.io/bitnami/kafka:3
     ports:
@@ -105,6 +109,7 @@ services:
       echo -e 'Creating kafka topics'
       kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic novas-pastorais --replication-factor 1 --partitions 1
       kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic lembretes-pastorais --replication-factor 1 --partitions 1
+      kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic novo-relatorio-financeiro --replication-factor 1 --partitions 1
 
       echo -e 'Successfully created the following topics:'
       kafka-topics.sh --bootstrap-server kafka:9092 --list
