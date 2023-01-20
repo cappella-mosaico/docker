@@ -4,11 +4,13 @@ services:
 
   front-admin-prod:
     image: front-admin-prod
+    restart: always
     ports:
       - 3001:80
 
   gateway:
     image: gateway
+    restart: always
     environment:
       - IPMOSAICO_ALLOW_HOST=${IPMOSAICO_ALLOW_HOST}
     ports:
@@ -16,6 +18,7 @@ services:
 
   comunicacao:
     image: comunicacao
+    restart: always
     environment:
       - ONE_SIGNAL_APP_ID=${ONE_SIGNAL_APP_ID}
       - ONE_SIGNAL_APP_KEY=${ONE_SIGNAL_APP_KEY}
@@ -40,12 +43,14 @@ services:
   db-financeiro:
     build:
       context: ./db-financeiro
+    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
   financeiro:
     image: financeiro
+    restart: always
     depends_on:
       - db-financeiro
       - kafka
@@ -53,18 +58,21 @@ services:
   db-eventos:
     build:
       context: ./db-eventos
+    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
   eventos:
     image: eventos
+    restart: always
     depends_on:
       - db-eventos
       - kafka
 
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.7
+    restart: always
     ports:
       - "2181:2181"
     volumes:
@@ -74,6 +82,7 @@ services:
 
   kafka:
     image: docker.io/bitnami/kafka:3
+    restart: always
     ports:
       - "29092:29092"
     volumes:
@@ -90,6 +99,7 @@ services:
 
   init-kafka:
     image: docker.io/bitnami/kafka:3
+    restart: always
     depends_on:
       - kafka
     entrypoint: [ '/bin/sh', '-c' ]
