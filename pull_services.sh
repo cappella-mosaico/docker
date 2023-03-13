@@ -4,4 +4,5 @@ git clone git@github.com:cappella-mosaico/pastorais.git
 git clone git@github.com:cappella-mosaico/financeiro.git
 git clone git@github.com:cappella-mosaico/comunicacao.git
 git clone git@github.com:cappella-mosaico/eventos.git
+git clone git@github.com:cappella-mosaico/reverseproxy.git
 cd docker

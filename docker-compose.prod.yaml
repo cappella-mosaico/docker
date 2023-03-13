@@ -2,19 +2,27 @@ version: '3.3'
 
 services:
 
+  reverseproxy:
+    build:
+      context: ../reverseproxy
+      dockerfile: Dockerfile
+    ports:
+      - 80:3000
+      - 8888:9090
+
   front-admin-prod:
+    depends_on:
+      - reverseproxy
     image: front-admin-prod
     restart: always
-    ports:
-      - 3001:80
 
   gateway:
+    depends_on:
+      - reverseproxy
     image: gateway
     restart: always
     environment:
       - IPMOSAICO_ALLOW_HOST=${IPMOSAICO_ALLOW_HOST}
-    ports:
-      - "9000:9090"
 
   comunicacao:
     image: comunicacao
@@ -24,7 +32,8 @@ services:
       - ONE_SIGNAL_APP_KEY=${ONE_SIGNAL_APP_KEY}
     depends_on:
       - kafka
-  db:
+
+  db-pastorais:
     build:
       context: ./db
       dockerfile: Dockerfile
@@ -37,7 +46,7 @@ services:
     image: pastorais
     restart: always
     depends_on:
-      - db
+      - db-pastorais
       - kafka
 
   db-financeiro:
