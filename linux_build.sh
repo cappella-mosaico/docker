@@ -29,11 +29,11 @@ cd ../docker
 cp ./tomcat/conf/web.xml$1 ../pastorais/web.xml
 cp ./tomcat/*.jar ../pastorais/
 cd ../pastorais
-sed -i 's/localhost\//db\//g' src/main/resources/META-INF/persistence.xml
-sed -i 's/localhost\//db\//g' src/main/java/startup/Startup.java
+sed -i 's/localhost\//db-pastorais\//g' src/main/resources/META-INF/persistence.xml
+sed -i 's/localhost\//db-pastorais\//g' src/main/java/startup/Startup.java
 mvn --quiet clean install
-sed -i 's/db\//localhost\//g' src/main/resources/META-INF/persistence.xml
-sed -i 's/db\//localhost\//g' src/main/java/startup/Startup.java
+sed -i 's/db-pastorais\//localhost\//g' src/main/resources/META-INF/persistence.xml
+sed -i 's/db-pastorais\//localhost\//g' src/main/java/startup/Startup.java
 cp ./target/pastorais-1.0-SNAPSHOT.war .
 docker build --quiet -f Dockerfile -t pastorais .
 rm ./pastorais-1.0-SNAPSHOT.war
