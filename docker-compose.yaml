@@ -6,8 +6,11 @@ services:
     build:
       context: ../reverseproxy
       dockerfile: Dockerfile
+    volumes:
+      - '~/certs:/etc/nginx/certs'
     ports:
       - 80:3000
+      - 443:443
       - 8888:9090
 
   front-admin:
@@ -16,12 +19,14 @@ services:
     build:
       context: ../front-admin/
       dockerfile: Dockerfile
+      args:
+        REACT_APP_IPMOSAICO_ROOT_URL: ${REACT_APP_IPMOSAICO_ROOT_URL}
     volumes:
       - '../front-admin:/app'
       - '../front-admin:/app/node-modules'
     environment:
       - CHOKIDAR_USEPOLLING=true
-      - REACT_APP_IPMOSAICO_ROOT_URL=${REACT_APP_IPMOSAICO_ROOT_URL}
+      - NGINX_PORT=3000
 
   gateway:
     depends_on:
