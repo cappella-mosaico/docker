@@ -13,21 +13,28 @@ services:
       - 443:443
       - 8888:8888
       - 9090:9090
+    restart: always
 
-  front-admin:
+  front-admin-prod:
     depends_on:
       - reverseproxy
-    build:
-      context: ../front-admin/
-      dockerfile: Dockerfile
-      args:
-        REACT_APP_IPMOSAICO_ROOT_URL: ${REACT_APP_IPMOSAICO_ROOT_URL}
-    volumes:
-      - '../front-admin:/app'
-      - '../front-admin:/app/node-modules'
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - NGINX_PORT=3000
+    image: front-admin-prod
+    restart: always
+
+#  front-admin:
+#    depends_on:
+#      - reverseproxy
+#    build:
+#      context: ../front-admin/
+#      dockerfile: Dockerfile
+#      args:
+#        REACT_APP_IPMOSAICO_ROOT_URL: ${REACT_APP_IPMOSAICO_ROOT_URL}
+#    volumes:
+#      - '../front-admin:/app'
+#      - '../front-admin:/app/node-modules'
+#    environment:
+#      - CHOKIDAR_USEPOLLING=true
+#      - NGINX_PORT=3000
 
   gateway:
     depends_on:
@@ -35,6 +42,7 @@ services:
     image: gateway
     environment:
       - IPMOSAICO_ALLOW_HOST=${IPMOSAICO_ALLOW_HOST}
+    restart: always
 
   comunicacao:
     image: comunicacao
@@ -43,22 +51,23 @@ services:
       - ONE_SIGNAL_APP_KEY=${ONE_SIGNAL_APP_KEY}
     depends_on:
       - kafka
+    restart: always
 
   db-pastorais:
     build:
       context: ./db
       dockerfile: Dockerfile
-    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    restart: always
 
   pastorais:
     image: pastorais
-    restart: always
     depends_on:
       - db-pastorais
       - kafka
+    restart: always
 
   db-financeiro:
     build:
@@ -66,12 +75,14 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    restart: always
 
   financeiro:
     image: financeiro
     depends_on:
       - db-financeiro
       - kafka
+    restart: always
 
   db-eventos:
     build:
@@ -79,12 +90,29 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    restart: always
 
   eventos:
     image: eventos
     depends_on:
       - db-eventos
       - kafka
+    restart: always
+
+  db-compromissos:
+    build:
+      context: ./db-compromissos
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    restart: always
+
+  compromissos:
+    image: compromissos
+    depends_on:
+      - db-compromissos
+      - kafka
+    restart: always
 
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.7
@@ -94,6 +122,7 @@ services:
       - "zookeeper_data:/bitnami"
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+    restart: always
 
   kafka:
     image: docker.io/bitnami/kafka:3
@@ -110,9 +139,11 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
+    restart: always
 
   init-kafka:
     image: docker.io/bitnami/kafka:3
+    restart: always
     depends_on:
       - kafka
     entrypoint: [ '/bin/sh', '-c' ]

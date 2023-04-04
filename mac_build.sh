@@ -102,6 +102,23 @@ docker build --quiet -f Dockerfile -t eventos .
 rm ./eventos-0.0.1-SNAPSHOT.jar
 sed -i '' 's/db-eventos/localhost:5432/g' src/main/resources/application.properties
 
+# COMPROMISSOS
+echo ' _______  _______  __   __  _______  ______    _______  __   __  ___   _______  _______  _______  _______ '
+echo '|       ||       ||  |_|  ||       ||    _ |  |       ||  |_|  ||   | |       ||       ||       ||       |'
+echo '|       ||   _   ||       ||    _  ||   | ||  |   _   ||       ||   | |  _____||  _____||   _   ||  _____|'
+echo '|       ||  | |  ||       ||   |_| ||   |_||_ |  | |  ||       ||   | | |_____ | |_____ |  | |  || |_____ '
+echo '|      _||  |_|  ||       ||    ___||    __  ||  |_|  ||       ||   | |_____  ||_____  ||  |_|  ||_____  |'
+echo '|     |_ |       || ||_|| ||   |    |   |  | ||       || ||_|| ||   |  _____| | _____| ||       | _____| |'
+echo '|_______||_______||_|   |_||___|    |___|  |_||_______||_|   |_||___| |_______||_______||_______||_______|'
+
+cd ../compromissos
+sed -i '' 's/localhost:5432/db-compromissos/g' src/main/resources/application.properties
+./mvnw install -q
+cp ./target/compromissos-0.0.1-SNAPSHOT.jar .
+docker build --quiet -f Dockerfile -t compromissos .
+rm ./compromissos-0.0.1-SNAPSHOT.jar
+sed -i '' 's/db-compromissos/localhost:5432/g' src/main/resources/application.properties
+
 # GATEWAY
 echo ' _______  _______  _______  _______  _     _  _______  __   __ '
 echo '|       ||   _   ||       ||       || | _ | ||   _   ||  | |  |'
