@@ -129,4 +129,4 @@ echo '|   |_| ||   _   |  |   |  |   |___ |   _   ||   _   |  |   |  '
 echo '|_______||__| |__|  |___|  |_______||__| |__||__| |__|  |___|  '
 
 cd ../gateway
-docker build --quiet -t gateway .
+docker build -t gateway .

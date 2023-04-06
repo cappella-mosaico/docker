@@ -15,26 +15,26 @@ services:
       - 9090:9090
     restart: always
 
-  front-admin-prod:
-    depends_on:
-      - reverseproxy
-    image: front-admin-prod
-    restart: always
-
-#  front-admin:
+#  front-admin-prod:
 #    depends_on:
 #      - reverseproxy
-#    build:
-#      context: ../front-admin/
-#      dockerfile: Dockerfile
-#      args:
-#        REACT_APP_IPMOSAICO_ROOT_URL: ${REACT_APP_IPMOSAICO_ROOT_URL}
-#    volumes:
-#      - '../front-admin:/app'
-#      - '../front-admin:/app/node-modules'
-#    environment:
-#      - CHOKIDAR_USEPOLLING=true
-#      - NGINX_PORT=3000
+#    image: front-admin-prod
+#    restart: always
+
+  front-admin:
+    depends_on:
+      - reverseproxy
+    build:
+      context: ../front-admin/
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_IPMOSAICO_ROOT_URL: ${REACT_APP_IPMOSAICO_ROOT_URL}
+    volumes:
+      - '../front-admin:/app'
+      - '../front-admin:/app/node-modules'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NGINX_PORT=3000
 
   gateway:
     depends_on:
