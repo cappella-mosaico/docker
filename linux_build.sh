@@ -2,18 +2,23 @@
 
 echo 'dont forget to pass .prod as a param when building for production'
 
-# FRONTEND
-echo ' _______  ______    _______  __    _  _______  _______  __    _  ______  '
-echo '|       ||    _ |  |       ||  |  | ||       ||       ||  |  | ||      | '
-echo '|    ___||   | ||  |   _   ||   |_| ||_     _||    ___||   |_| ||  _    |'
-echo '|   |___ |   |_||_ |  | |  ||       |  |   |  |   |___ |       || | |   |'
-echo '|    ___||    __  ||  |_|  ||  _    |  |   |  |    ___||  _    || |_|   |'
-echo '|   |    |   |  | ||       || | |   |  |   |  |   |___ | | |   ||       |'
-echo '|___|    |___|  |_||_______||_|  |__|  |___|  |_______||_|  |__||______| '
+if [[ $1 == ".prod" ]]; then
 
-cd ../front-admin
-npm install
-docker build --quiet --build-arg REACT_APP_IPMOSAICO_ROOT_URL=$REACT_APP_IPMOSAICO_ROOT_URL -f Dockerfile.prod -t front-admin-prod .
+  # FRONTEND
+  echo ' _______  ______    _______  __    _  _______  _______  __    _  ______  '
+  echo '|       ||    _ |  |       ||  |  | ||       ||       ||  |  | ||      | '
+  echo '|    ___||   | ||  |   _   ||   |_| ||_     _||    ___||   |_| ||  _    |'
+  echo '|   |___ |   |_||_ |  | |  ||       |  |   |  |   |___ |       || | |   |'
+  echo '|    ___||    __  ||  |_|  ||  _    |  |   |  |    ___||  _    || |_|   |'
+  echo '|   |    |   |  | ||       || | |   |  |   |  |   |___ | | |   ||       |'
+  echo '|___|    |___|  |_||_______||_|  |__|  |___|  |_______||_|  |__||______| '
+
+
+  cd ../front-admin
+  npm install
+  docker build --quiet --build-arg REACT_APP_IPMOSAICO_ROOT_URL=$REACT_APP_IPMOSAICO_ROOT_URL -f Dockerfile.prod -t front-admin-prod .
+
+fi
 
 # PASTORAIS
 
