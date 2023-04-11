@@ -1,0 +1,9 @@
+* TODO crud de compromissos
+ através do admin compromissos devem poder ser listados, cadastrados, alterados e excluídos.
+1- <2023-04-11 ter 06:31> Por enquanto só fiz a parte de cadastro mas está muito crua. Depois que o cadastro é feito é necessário:
+ - [X] emitir mensagem de sucesso
+ - [X] limpar o formulário
+ - [X] atualizar lista de compromissos
+* TODO add filtro de compromissos por ministerio
+* TODO alterar splash screen do admin
+* TODO alterar ícone do admin
