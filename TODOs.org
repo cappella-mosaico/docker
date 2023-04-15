@@ -7,10 +7,13 @@
 2. <2023-04-12 qua 07:12> os checks de ontem foram cumpridos. Hoje eu devo:
    - [X] melhorar a apresentação dos compromissos listados
    - [X] adicionar opcao para nao trazer compromissos que já passaram
-   - [ ] adicionar o mesmo filtro de compromissos passados no gateway
-   - [ ] add filtro de compromissos por ministerio
+   - [X] adicionar o mesmo filtro de compromissos passados no gateway
+   - [X] add filtro de compromissos por ministerio
    - [ ] adicionar tipo "REUNIAO" aos compromissos
+   - [ ] adicionar tipo "Acampamento" e "Departamento Infantil"  aos ministerios
    - [ ] adicionar opcao de editar compromisso
    - [ ] adicionar opcao de apagar compromisso
+* TODO fix em pessoas não poderem ser cadastradas em mais de um cpf com o mesmo evento
+1. <2023-04-15 sáb 06:06> consertei o bug hoje e vou fazer deploy, precisei criar uma migration dropando a unique anterior que era só por cpf pra incluir uma por cpf e evento_id. Nao entendi porque não fiz isso já da primeira vez...
 * TODO alterar splash screen do admin
 * TODO alterar ícone do admin
