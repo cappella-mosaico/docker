@@ -29,7 +29,7 @@ echo '|   |  | ||   |___  |     | |   |___ |   |  | | _____| ||   |___ |   |    
 echo '|___|  |_||_______|  |___|  |_______||___|  |_||_______||_______||___|    |___|  |_||_______||__| |__|  |___|  '
 
 cd ../reverseproxy
-docker build --quiet .
+docker build --quiet -t reverseproxy .
 
 # PASTORAIS
 
