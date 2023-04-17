@@ -1,4 +1,7 @@
-* TODO crud de compromissos
+* TODO alterar splash screen do admin
+* TODO alterar ícone do admin
+* DONE <2023-04-17 seg 08:10> crud de compromissos
+  CLOSED: [2023-04-17 seg 08:10]
  através do admin compromissos devem poder ser listados, cadastrados, alterados e excluídos.
 1. <2023-04-11 ter 06:31> Por enquanto só fiz a parte de cadastro mas está muito crua. Depois que o cadastro é feito é necessário:
    - [X] emitir mensagem de sucesso
@@ -9,11 +12,11 @@
    - [X] adicionar opcao para nao trazer compromissos que já passaram
    - [X] adicionar o mesmo filtro de compromissos passados no gateway
    - [X] add filtro de compromissos por ministerio
+3. <2023-04-17 seg 08:10> esses aqui na verdade foram feitos nos ultimos 2 dias
    - [X] adicionar tipo "REUNIAO" aos compromissos
    - [X] adicionar tipo "Acampamento" e "Departamento Infantil"  aos ministerios
    - [X] adicionar opcao de apagar compromisso
-   - [ ] adicionar opcao de editar compromisso
-* TODO alterar splash screen do admin
-* TODO alterar ícone do admin
+   - [X] adicionar tipo "Diaconia" aos ministérios
+   - [X] adicionar opcao de editar compromisso
 * DONE <2023-04-15 sáb 11:58> fix em pessoas não poderem ser cadastradas em mais de um cpf com o mesmo evento
 1. <2023-04-15 sáb 06:06> consertei o bug hoje e vou fazer deploy, precisei criar uma migration dropando a unique anterior que era só por cpf pra incluir uma por cpf e evento_id. Nao entendi porque não fiz isso já da primeira vez...
