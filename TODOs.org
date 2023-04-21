@@ -1,6 +1,19 @@
-* TODO alterar splash screen do admin
-* TODO alterar ícone do admin
-* DONE <2023-04-17 seg 08:10> crud de compromissos
+* TODO persist Equipe
+1. <2023-04-21 sex 06:50> criei a equipe a partir da entrada de texto do usuario. Falta
+ - [ ] persistir a equipe criada,
+ - [ ] só preencher o createdAt se o compromisso ainda não tem id e
+ - [ ] sempre preencher o updatedAt se ele já possuir id
+ - [ ] pesquisar a equipe antes de persistir uma nova
+ - [ ] vincular a equipe ao compromisso
+ - [ ] aplicar o mesmo tratamento de nomes de participantes da equipe no endpoint que cadastra elas diretamente
+* TODO change response for GET to include only escala-related fields
+* DONE turn ministerio into an optional GET parameter
+  CLOSED: [2023-04-20 qui 06:52]
+* DONE alterar ícone do admin
+  CLOSED: [2023-04-18 ter 07:10]
+* DONE alterar splash screen do admin
+  CLOSED: [2023-04-18 ter 07:09]
+* DONE crud de compromissos
   CLOSED: [2023-04-17 seg 08:10]
  através do admin compromissos devem poder ser listados, cadastrados, alterados e excluídos.
 1. <2023-04-11 ter 06:31> Por enquanto só fiz a parte de cadastro mas está muito crua. Depois que o cadastro é feito é necessário:
@@ -18,5 +31,6 @@
    - [X] adicionar opcao de apagar compromisso
    - [X] adicionar tipo "Diaconia" aos ministérios
    - [X] adicionar opcao de editar compromisso
-* DONE <2023-04-15 sáb 11:58> fix em pessoas não poderem ser cadastradas em mais de um cpf com o mesmo evento
+* DONE fix em pessoas não poderem ser cadastradas em mais de um cpf com o mesmo evento
+  CLOSED: <2023-04-15 sáb 11:58>
 1. <2023-04-15 sáb 06:06> consertei o bug hoje e vou fazer deploy, precisei criar uma migration dropando a unique anterior que era só por cpf pra incluir uma por cpf e evento_id. Nao entendi porque não fiz isso já da primeira vez...
