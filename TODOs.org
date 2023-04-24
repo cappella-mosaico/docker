@@ -1,12 +1,14 @@
-* TODO persist Equipe
+* DONE change response for GET to include only escala-related fields
+  CLOSED: [2023-04-24 seg 10:14]
+* DONE persist Equipe
+  CLOSED: [2023-04-24 seg 10:14]
 1. <2023-04-21 sex 06:50> criei a equipe a partir da entrada de texto do usuario. Falta
- - [ ] persistir a equipe criada,
- - [ ] só preencher o createdAt se o compromisso ainda não tem id e
- - [ ] sempre preencher o updatedAt se ele já possuir id
- - [ ] pesquisar a equipe antes de persistir uma nova
- - [ ] vincular a equipe ao compromisso
- - [ ] aplicar o mesmo tratamento de nomes de participantes da equipe no endpoint que cadastra elas diretamente
-* TODO change response for GET to include only escala-related fields
+   - [X] persistir a equipe criada,
+   - [X] só preencher o createdAt se o compromisso ainda não tem id e
+   - [X] sempre preencher o updatedAt se ele já possuir id
+   - [X] pesquisar a equipe antes de persistir uma nova
+   - [X] vincular a equipe ao compromisso
+   - [ ] aplicar o mesmo tratamento de nomes de participantes da equipe no endpoint que cadastra elas diretamente
 * DONE turn ministerio into an optional GET parameter
   CLOSED: [2023-04-20 qui 06:52]
 * DONE alterar ícone do admin
