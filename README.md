@@ -17,8 +17,8 @@ then `volta install node`
 
 - Clone all repos from the organization
   - `pull_services.sh`
-- Build the application by running the build script based on your environment
-  - `./linux_build.sh` or `./mac_build.sh`
+- Build the application by running the build script
+  - `./build.sh`
 - Start the application
   - `docker-compose up`
 

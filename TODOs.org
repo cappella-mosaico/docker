@@ -1,3 +1,5 @@
+* TODO remove ManyToMany relation between Compromisso and Equipe. One compromisso may have one equipe. One equipe can only be assigned to one compromisso.
+* DONE remove EquipeController
 * DONE change response for GET to include only escala-related fields
   CLOSED: [2023-04-24 seg 10:14]
 * DONE persist Equipe

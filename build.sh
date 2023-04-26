@@ -1,25 +1,30 @@
 #!/bin/bash
 
-echo 'dont forget to pass .prod as a param when building for production'
+function replace() {
+  local regex=$1
+  local file_to_change=$2
+  if [[ "$OSTYPE" == "linux"* ]]; then
+    sed -i $regex $file_to_change
+  else
+    sed -i '' $regex $file_to_change
+  fi
+}
 
-if [[ $1 == ".prod" ]]; then
+# FRONTEND
+echo ' _______  ______    _______  __    _  _______  _______  __    _  ______  '
+echo '|       ||    _ |  |       ||  |  | ||       ||       ||  |  | ||      | '
+echo '|    ___||   | ||  |   _   ||   |_| ||_     _||    ___||   |_| ||  _    |'
+echo '|   |___ |   |_||_ |  | |  ||       |  |   |  |   |___ |       || | |   |'
+echo '|    ___||    __  ||  |_|  ||  _    |  |   |  |    ___||  _    || |_|   |'
+echo '|   |    |   |  | ||       || | |   |  |   |  |   |___ | | |   ||       |'
+echo '|___|    |___|  |_||_______||_|  |__|  |___|  |_______||_|  |__||______| '
 
-  # FRONTEND
-  echo ' _______  ______    _______  __    _  _______  _______  __    _  ______  '
-  echo '|       ||    _ |  |       ||  |  | ||       ||       ||  |  | ||      | '
-  echo '|    ___||   | ||  |   _   ||   |_| ||_     _||    ___||   |_| ||  _    |'
-  echo '|   |___ |   |_||_ |  | |  ||       |  |   |  |   |___ |       || | |   |'
-  echo '|    ___||    __  ||  |_|  ||  _    |  |   |  |    ___||  _    || |_|   |'
-  echo '|   |    |   |  | ||       || | |   |  |   |  |   |___ | | |   ||       |'
-  echo '|___|    |___|  |_||_______||_|  |__|  |___|  |_______||_|  |__||______| '
+cd ../front-admin
+npm install
+docker build --quiet --build-arg REACT_APP_IPMOSAICO_ROOT_URL=$REACT_APP_IPMOSAICO_ROOT_URL -f Dockerfile.prod -t front-admin-prod .
 
 
-  cd ../front-admin
-  npm install
-  docker build --quiet --build-arg REACT_APP_IPMOSAICO_ROOT_URL=$REACT_APP_IPMOSAICO_ROOT_URL -f Dockerfile.prod -t front-admin-prod .
-
-fi
-
+# REVERSEPROXY
 echo ' ______    _______  __   __  _______  ______    _______  _______  _______  ______    _______  __   __  __   __ '
 echo '|    _ |  |       ||  | |  ||       ||    _ |  |       ||       ||       ||    _ |  |       ||  |_|  ||  | |  |'
 echo '|   | ||  |    ___||  |_|  ||    ___||   | ||  |  _____||    ___||    _  ||   | ||  |   _   ||       ||  |_|  |'
@@ -45,11 +50,11 @@ cd ../docker
 cp ./tomcat/conf/web.xml$1 ../pastorais/web.xml
 cp ./tomcat/*.jar ../pastorais/
 cd ../pastorais
-sed -i 's/localhost\//db-pastorais\//g' src/main/resources/META-INF/persistence.xml
-sed -i 's/localhost\//db-pastorais\//g' src/main/java/startup/Startup.java
+replace 's/localhost\//db-pastorais\//g' src/main/resources/META-INF/persistence.xml
+replace 's/localhost\//db-pastorais\//g' src/main/java/startup/Startup.java
 mvn --quiet clean install
-sed -i 's/db-pastorais\//localhost\//g' src/main/resources/META-INF/persistence.xml
-sed -i 's/db-pastorais\//localhost\//g' src/main/java/startup/Startup.java
+replace 's/db-pastorais\//localhost\//g' src/main/resources/META-INF/persistence.xml
+replace 's/db-pastorais\//localhost\//g' src/main/java/startup/Startup.java
 cp ./target/pastorais-1.0-SNAPSHOT.war .
 docker build --quiet -f Dockerfile -t pastorais .
 rm ./pastorais-1.0-SNAPSHOT.war
@@ -69,11 +74,11 @@ cd ../docker
 cp ./tomcat/conf/web.xml$1 ../financeiro/web.xml
 cp ./tomcat/*.jar ../financeiro/
 cd ../financeiro
-sed -i 's/localhost\//db-financeiro\//g' src/main/resources/META-INF/persistence.xml
-sed -i 's/localhost\//db-financeiro\//g' src/main/java/startup/Startup.java
+replace 's/localhost\//db-financeiro\//g' src/main/resources/META-INF/persistence.xml
+replace 's/localhost\//db-financeiro\//g' src/main/java/startup/Startup.java
 mvn --quiet clean install
-sed -i 's/db-financeiro\//localhost\//g' src/main/resources/META-INF/persistence.xml
-sed -i 's/db-financeiro\//localhost\//g' src/main/java/startup/Startup.java
+replace 's/db-financeiro\//localhost\//g' src/main/resources/META-INF/persistence.xml
+replace 's/db-financeiro\//localhost\//g' src/main/java/startup/Startup.java
 cp ./target/financeiro-1.0-SNAPSHOT.war .
 docker build --quiet -f Dockerfile -t financeiro .
 rm ./financeiro-1.0-SNAPSHOT.war
@@ -90,13 +95,13 @@ echo '|     |_ |       || ||_|| ||       || | |   ||   | |     |_ |   _   ||    
 echo '|_______||_______||_|   |_||_______||_|  |__||___| |_______||__| |__||_______||__| |__||_______|'
 
 cd ../comunicacao
-sed -i 's/localhost:29092/kafka:9092/g' src/main/java/kafka/NewPastoralConsumer.java
-sed -i 's/localhost:29092/kafka:9092/g' src/main/java/kafka/LembretePastoralConsumer.java
-sed -i 's/localhost:29092/kafka:9092/g' src/main/java/kafka/NewRelatorioFinanceiroConsumer.java
+replace 's/localhost:29092/kafka:9092/g' src/main/java/kafka/NewPastoralConsumer.java
+replace 's/localhost:29092/kafka:9092/g' src/main/java/kafka/LembretePastoralConsumer.java
+replace 's/localhost:29092/kafka:9092/g' src/main/java/kafka/NewRelatorioFinanceiroConsumer.java
 export ONE_SIGNAL_APP_ID="97bc067c-2344-4a86-a6b1-0206f51df4e9" && export ONE_SIGNAL_APP_KEY="NTgwOTNjYmEtNGZjYi00ZGYyLThmMTktMGM5MzdiNzRkZDkz" && mvn --quiet clean install
-sed -i 's/kafka:9092/localhost:29092/g' src/main/java/kafka/NewPastoralConsumer.java
-sed -i 's/kafka:9092/localhost:29092/g' src/main/java/kafka/LembretePastoralConsumer.java
-sed -i 's/kafka:9092/localhost:29092/g' src/main/java/kafka/NewRelatorioFinanceiroConsumer.java
+replace 's/kafka:9092/localhost:29092/g' src/main/java/kafka/NewPastoralConsumer.java
+replace 's/kafka:9092/localhost:29092/g' src/main/java/kafka/LembretePastoralConsumer.java
+replace 's/kafka:9092/localhost:29092/g' src/main/java/kafka/NewRelatorioFinanceiroConsumer.java
 cp ./target/comunicacao-1.0-SNAPSHOT.jar .
 docker build --quiet -f Dockerfile -t comunicacao .
 rm ./comunicacao-1.0-SNAPSHOT.jar
@@ -111,12 +116,12 @@ echo '|   |___  |     | |   |___ | | |   |  |   |  |       | _____| |'
 echo '|_______|  |___|  |_______||_|  |__|  |___|  |_______||_______|'
 
 cd ../eventos
-sed -i 's/localhost:5432/db-eventos/g' src/main/resources/application.properties
+replace 's/localhost:5432/db-eventos/g' src/main/resources/application.properties
 ./mvnw install -q
 cp ./target/eventos-0.0.1-SNAPSHOT.jar .
 docker build --quiet -f Dockerfile -t eventos .
 rm ./eventos-0.0.1-SNAPSHOT.jar
-sed -i 's/db-eventos/localhost:5432/g' src/main/resources/application.properties
+replace 's/db-eventos/localhost:5432/g' src/main/resources/application.properties
 
 # COMPROMISSOS
 echo ' _______  _______  __   __  _______  ______    _______  __   __  ___   _______  _______  _______  _______ '
@@ -128,12 +133,12 @@ echo '|     |_ |       || ||_|| ||   |    |   |  | ||       || ||_|| ||   |  ___
 echo '|_______||_______||_|   |_||___|    |___|  |_||_______||_|   |_||___| |_______||_______||_______||_______|'
 
 cd ../compromissos
-sed -i 's/localhost:5432/db-compromissos/g' src/main/resources/application.properties
+replace 's/localhost:5432/db-compromissos/g' src/main/resources/application.properties
 ./mvnw install -q
 cp ./target/compromissos-0.0.1-SNAPSHOT.jar .
 docker build --quiet -f Dockerfile -t compromissos .
 rm ./compromissos-0.0.1-SNAPSHOT.jar
-sed -i 's/db-compromissos/localhost:5432/g' src/main/resources/application.properties
+replace 's/db-compromissos/localhost:5432/g' src/main/resources/application.properties
 
 # GATEWAY
 echo ' _______  _______  _______  _______  _     _  _______  __   __ '
