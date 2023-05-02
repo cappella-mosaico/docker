@@ -1,4 +1,12 @@
-* TODO remove ManyToMany relation between Compromisso and Equipe. One compromisso may have one equipe. One equipe can only be assigned to one compromisso.
+* TODO fix Mairon's phone app error
+* DONE refactor event date on listing to dd/MM/yyyy
+  CLOSED: [2023-05-02 ter 09:06]
+* DONE show only the starting date of event
+  CLOSED: [2023-05-02 ter 09:06]
+* DONE change button from 'mostrar participantes' to 'carregar participantes'
+  CLOSED: [2023-05-02 ter 09:06]
+* DONE turn the 'carregar participantes' into a real button as opposed to a simple link
+  CLOSED: [2023-05-02 ter 09:06]
 * DONE remove EquipeController
 * DONE change response for GET to include only escala-related fields
   CLOSED: [2023-04-24 seg 10:14]
