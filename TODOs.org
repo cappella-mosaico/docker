@@ -1,9 +1,11 @@
-* TODO update Compromissos table once a new compromisso is saved
-* TODO bind the selected sunday with the compromissos being shown at the table
-* TODO add a remove button to compromissos within the table (and outside when not applicable)
 * TODO fix Mairon's phone app error
+* TODO update Compromissos table once a new compromisso is saved
+* DONE add a remove button to compromissos within the table (and outside when not applicable)
+  CLOSED: [2023-05-11 qui 09:22]
 * DONE fill-up the flag if we have the number of compromissos per sala equal to the number of atividades x2
-  CLOSED: [2023-05-10 qua 10:00]
+  CLOSED: [2023-05-11 qui 07:10]
+* DONE bind the selected sunday with the compromissos being shown at the table
+  CLOSED: [2023-05-11 qui 06:17]
 * DONE refactor event date on listing to dd/MM/yyyy
   CLOSED: [2023-05-02 ter 09:06]
 * DONE show only the starting date of event
