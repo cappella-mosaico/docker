@@ -1,5 +1,8 @@
 * TODO fix Mairon's phone app error
-* TODO update Compromissos table once a new compromisso is saved
+* TODO create 3 types of escala. EBD, Culto, Ambos
+* DONE salas and atividades can only be loaded with compromissos from selected month
+* DONE fix bug where after having two compromissos with the same equipe, by updating one of them the other one lost its team
+* DONE update Compromissos table once a new compromisso is saved
 * DONE add a remove button to compromissos within the table (and outside when not applicable)
   CLOSED: [2023-05-11 qui 09:22]
 * DONE fill-up the flag if we have the number of compromissos per sala equal to the number of atividades x2
