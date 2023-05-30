@@ -38,6 +38,8 @@ services:
     depends_on:
       - reverseproxy
     image: gateway
+    volumes:
+      - '~/ipmosaico-users:/ipmosaico-users'
     environment:
       - IPMOSAICO_ALLOW_HOST=${IPMOSAICO_ALLOW_HOST}
     restart: always
