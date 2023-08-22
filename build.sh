@@ -150,4 +150,4 @@ echo '|   |_| ||   _   |  |   |  |   |___ |   _   ||   _   |  |   |  '
 echo '|_______||__| |__|  |___|  |_______||__| |__||__| |__|  |___|  '
 
 cd ../gateway
-docker build --build-arg IPMOSAICO_ALLOW_HOST=$IPMOSAICO_ALLOW_HOST -t gateway .
+docker build -t gateway .
