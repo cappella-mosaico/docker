@@ -44,6 +44,16 @@ services:
       - IPMOSAICO_ALLOW_HOST=${IPMOSAICO_ALLOW_HOST}
     restart: always
 
+  radio:
+    depends_on:
+      - reverseproxy
+    volumes:
+      - '~/ipmosaico/audios:/audios'
+    ports:
+      - 3000:3000
+    image: radio
+    restart: always
+
   comunicacao:
     image: comunicacao
     environment:
