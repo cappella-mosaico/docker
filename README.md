@@ -144,10 +144,13 @@ export ONE_SIGNAL_APP_KEY=NTgwOTNjYmEtNGZjYi00ZGYyLThmMTktMGM5MzdiNzRkZDkz
 # build and run
 
 - Clone all repos from the organization
-  - `pull_services.sh`
+- `pull_services.sh`
 - Build the application by running the build script
-  - `./build.sh`
+- `./build.sh`
 - Start the application
-  - `docker-compose up`
+- `docker-compose up`
+
+# check running containers
+`docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Image}}"`
 
 if everything goes well, you'll be able to access it by going to http://localhost

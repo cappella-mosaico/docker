@@ -150,4 +150,5 @@ echo '|   |_| ||   _   |  |   |  |   |___ |   _   ||   _   |  |   |  '
 echo '|_______||__| |__|  |___|  |_______||__| |__||__| |__|  |___|  '
 
 cd ../gateway
+gradle shadowJar --no-daemon --stacktrace
 docker build -t gateway .
