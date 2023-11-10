@@ -132,6 +132,15 @@ ejYtaYprUAsiU+w=
 -----END TRUSTED CERTIFICATE-----
 ```
 
+# environment variables
+export REACT_APP_IPMOSAICO_ROOT_URL=https://localhost:9090
+export IPMOSAICO_ALLOW_HOST=localhost
+export ONE_SIGNAL_APP_ID=97bc067c-2344-4a86-a6b1-0206f51df4e9
+export ONE_SIGNAL_APP_KEY=NTgwOTNjYmEtNGZjYi00ZGYyLThmMTktMGM5MzdiNzRkZDkz
+
+# users.json
+
+
 # build and run
 
 - Clone all repos from the organization
