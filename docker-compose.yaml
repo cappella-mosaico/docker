@@ -13,6 +13,13 @@ services:
       - 9090:9090
     restart: always
 
+
+  front-admin-prod:
+    depends_on:
+      - reverseproxy
+    image: front-admin-prod
+    restart: always
+
   front-admin:
     depends_on:
       - reverseproxy
