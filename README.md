@@ -133,12 +133,24 @@ ejYtaYprUAsiU+w=
 ```
 
 # environment variables
+add this to your ~/.bashrc
+```
 export REACT_APP_IPMOSAICO_ROOT_URL=https://localhost:9090
 export IPMOSAICO_ALLOW_HOST=localhost
 export ONE_SIGNAL_APP_ID=97bc067c-2344-4a86-a6b1-0206f51df4e9
 export ONE_SIGNAL_APP_KEY=NTgwOTNjYmEtNGZjYi00ZGYyLThmMTktMGM5MzdiNzRkZDkz
+```
 
 # users.json
+create a `~/ipmosaico-users`
+inside it create a users.json file with the following contentÇ
+```
+{
+  "admin": "8dea772d942477f0ba78c42fa4a17794cca6a222e12082543b0c77bb7778873a"
+}
+
+```
+this password was generated with `echo -n ipmosaico | sha256sum` and now the password for the "admin" user on your local env will be "ipmosaico"
 
 
 # build and run
