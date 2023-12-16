@@ -38,28 +38,28 @@ docker build --quiet -t reverseproxy .
 
 # PASTORAIS
 
-echo ' _______  _______  _______  _______  _______  ______    _______  ___   _______ '
-echo '|       ||   _   ||       ||       ||       ||    _ |  |   _   ||   | |       |'
-echo '|    _  ||  |_|  ||  _____||_     _||   _   ||   | ||  |  |_|  ||   | |  _____|'
-echo '|   |_| ||       || |_____   |   |  |  | |  ||   |_||_ |       ||   | | |_____ '
-echo '|    ___||       ||_____  |  |   |  |  |_|  ||    __  ||       ||   | |_____  |'
-echo '|   |    |   _   | _____| |  |   |  |       ||   |  | ||   _   ||   |  _____| |'
-echo '|___|    |__| |__||_______|  |___|  |_______||___|  |_||__| |__||___| |_______|'
+#echo ' _______  _______  _______  _______  _______  ______    _______  ___   _______ '
+#echo '|       ||   _   ||       ||       ||       ||    _ |  |   _   ||   | |       |'
+#echo '|    _  ||  |_|  ||  _____||_     _||   _   ||   | ||  |  |_|  ||   | |  _____|'
+#echo '|   |_| ||       || |_____   |   |  |  | |  ||   |_||_ |       ||   | | |_____ '
+#echo '|    ___||       ||_____  |  |   |  |  |_|  ||    __  ||       ||   | |_____  |'
+#echo '|   |    |   _   | _____| |  |   |  |       ||   |  | ||   _   ||   |  _____| |'
+#echo '|___|    |__| |__||_______|  |___|  |_______||___|  |_||__| |__||___| |_______|'
 
-cd ../docker
-cp ./tomcat/conf/web.xml$1 ../pastorais/web.xml
-cp ./tomcat/*.jar ../pastorais/
-cd ../pastorais
-replace 's/localhost\//db-pastorais\//g' src/main/resources/META-INF/persistence.xml
-replace 's/localhost\//db-pastorais\//g' src/main/java/startup/Startup.java
-mvn --quiet clean install
-replace 's/db-pastorais\//localhost\//g' src/main/resources/META-INF/persistence.xml
-replace 's/db-pastorais\//localhost\//g' src/main/java/startup/Startup.java
-cp ./target/pastorais-1.0-SNAPSHOT.war .
-docker build --quiet -f Dockerfile -t pastorais .
-rm ./pastorais-1.0-SNAPSHOT.war
-rm ./web.xml
-rm ./*.jar
+#cd ../docker
+#cp ./tomcat/conf/web.xml$1 ../pastorais/web.xml
+#cp ./tomcat/*.jar ../pastorais/
+#cd ../pastorais
+#replace 's/localhost\//db-pastorais\//g' src/main/resources/META-INF/persistence.xml
+#replace 's/localhost\//db-pastorais\//g' src/main/java/startup/Startup.java
+#mvn --quiet clean install
+#replace 's/db-pastorais\//localhost\//g' src/main/resources/META-INF/persistence.xml
+#replace 's/db-pastorais\//localhost\//g' src/main/java/startup/Startup.java
+#cp ./target/pastorais-1.0-SNAPSHOT.war .
+#docker build --quiet -f Dockerfile -t pastorais .
+#rm ./pastorais-1.0-SNAPSHOT.war
+#rm ./web.xml
+#rm ./*.jar
 
 # FINANCEIRO
 echo ' _______  ___   __    _  _______  __    _  _______  _______  ___   ______    _______ '
