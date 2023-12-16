@@ -13,12 +13,6 @@ services:
       - 9090:9090
     restart: always
 
-  front-admin-prod:
-    depends_on:
-      - reverseproxy
-    image: front-admin-prod
-    restart: always
-
   front-admin:
     depends_on:
       - reverseproxy
@@ -50,22 +44,6 @@ services:
       - ONE_SIGNAL_APP_ID=${ONE_SIGNAL_APP_ID}
       - ONE_SIGNAL_APP_KEY=${ONE_SIGNAL_APP_KEY}
     depends_on:
-      - kafka
-    restart: always
-
-  db-pastorais:
-    build:
-      context: ./db
-      dockerfile: Dockerfile
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    restart: always
-
-  pastorais:
-    image: pastorais
-    depends_on:
-      - db-pastorais
       - kafka
     restart: always
 
@@ -102,6 +80,8 @@ services:
   db-compromissos:
     build:
       context: ./db-compromissos
+    ports:
+      - "5437:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -109,6 +89,9 @@ services:
 
   compromissos:
     image: compromissos
+    environment:
+      - ONE_SIGNAL_APP_ID=${ONE_SIGNAL_APP_ID}
+      - ONE_SIGNAL_APP_KEY=${ONE_SIGNAL_APP_KEY}
     depends_on:
       - db-compromissos
       - kafka
@@ -140,26 +123,6 @@ services:
     depends_on:
       - zookeeper
     restart: always
-
-  init-kafka:
-    image: docker.io/bitnami/kafka:3
-    restart: always
-    depends_on:
-      - kafka
-    entrypoint: [ '/bin/sh', '-c' ]
-    command: |
-      "
-      # blocks until kafka is reachable
-      kafka-topics.sh --bootstrap-server kafka:9092 --list
-
-      echo -e 'Creating kafka topics'
-      kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic novas-pastorais --replication-factor 1 --partitions 1
-      kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic lembretes-pastorais --replication-factor 1 --partitions 1
-      kafka-topics.sh --bootstrap-server kafka:9092 --create --if-not-exists --topic novo-relatorio-financeiro --replication-factor 1 --partitions 1
-
-      echo -e 'Successfully created the following topics:'
-      kafka-topics.sh --bootstrap-server kafka:9092 --list
-      "
 
 volumes:
   zookeeper_data:
