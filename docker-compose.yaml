@@ -56,7 +56,6 @@ services:
     image: eventos
     depends_on:
       - db-eventos
-      - kafka
     restart: always
 
   db-compromissos:
@@ -76,5 +75,4 @@ services:
       - ONE_SIGNAL_APP_KEY=${ONE_SIGNAL_APP_KEY}
     depends_on:
       - db-compromissos
-      - kafka
     restart: always
