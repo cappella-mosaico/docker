@@ -13,7 +13,6 @@ services:
       - 9090:9090
     restart: always
 
-
   front-admin-prod:
     depends_on:
       - reverseproxy
@@ -43,30 +42,6 @@ services:
       - '~/ipmosaico-users:/ipmosaico-users'
     environment:
       - IPMOSAICO_ALLOW_HOST=${IPMOSAICO_ALLOW_HOST}
-    restart: always
-
-  comunicacao:
-    image: comunicacao
-    environment:
-      - ONE_SIGNAL_APP_ID=${ONE_SIGNAL_APP_ID}
-      - ONE_SIGNAL_APP_KEY=${ONE_SIGNAL_APP_KEY}
-    depends_on:
-      - kafka
-    restart: always
-
-  db-financeiro:
-    build:
-      context: ./db-financeiro
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    restart: always
-
-  financeiro:
-    image: financeiro
-    depends_on:
-      - db-financeiro
-      - kafka
     restart: always
 
   db-eventos:
@@ -103,36 +78,3 @@ services:
       - db-compromissos
       - kafka
     restart: always
-
-  zookeeper:
-    image: docker.io/bitnami/zookeeper:3.7
-    ports:
-      - "2181:2181"
-    volumes:
-      - "zookeeper_data:/bitnami"
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-    restart: always
-
-  kafka:
-    image: docker.io/bitnami/kafka:3
-    ports:
-      - "29092:29092"
-    volumes:
-      - "kafka_data:/bitnami"
-    environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_LISTENERS=EXTERNAL_SAME_HOST://:29092,INTERNAL://:9092
-      - KAFKA_ADVERTISED_LISTENERS=INTERNAL://kafka:9092,EXTERNAL_SAME_HOST://localhost:29092
-      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:PLAINTEXT,EXTERNAL_SAME_HOST:PLAINTEXT
-      - KAFKA_INTER_BROKER_LISTENER_NAME=INTERNAL
-      - ALLOW_PLAINTEXT_LISTENER=yes
-    depends_on:
-      - zookeeper
-    restart: always
-
-volumes:
-  zookeeper_data:
-    driver: local
-  kafka_data:
-    driver: local
